@@ -10,15 +10,15 @@ using static Akka.DistributedTest.Models.ShardTest.FCActorMessages;
 
 namespace ShardTest
 {
-    public class FCActor : ReceiveActor
+    public class FCInventoryAllocationActor : ReceiveActor
     {
 
-        public FCActor()
+        public FCInventoryAllocationActor()
         {
-            Receive<ProcessMessage>(a =>
+            Receive<OrderIngested>(a =>
             {
                 var cluster = Cluster.Get(Context.System);
-                Console.WriteLine($"Actor {Context.Self.Path.Name} -- {cluster.SelfAddress} -- {a.FCID}");
+                Console.WriteLine($"Node {cluster.SelfAddress} ::: Fulfillment Center {a.FCID} ::: Allocating inventory for order {a.OrderId}");
             });
         }
 

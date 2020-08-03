@@ -6,13 +6,14 @@ namespace Akka.DistributedTest.Models.ShardTest
 {
     public class FCActorMessages
     {
-        public class ProcessMessage
+        public class OrderIngested
         {
             public readonly int FCID;
-
-            public ProcessMessage(int fcid)
+            public readonly Guid OrderId;
+            public OrderIngested(int fcid)
             {
                 FCID = fcid;
+                OrderId = Guid.NewGuid();
             }
         }
     }

@@ -15,18 +15,18 @@ using static Akka.Actor.Props;
 
 namespace ShardTest
 {
-    public class MessageCreator : ReceiveActor
+    public class OrderIngestionActor : ReceiveActor
     {
         private readonly Props _routerProps;
         private readonly IActorRef _region;
         private readonly Random _r;
-        public MessageCreator()
+        public OrderIngestionActor()
         {
             _r = new Random();
 
             //sharded
 
-            var creatorProps = Create<FCActor>();
+            var creatorProps = Create<FCInventoryAllocationActor>();
 
             var shardExtension = ClusterSharding.Get(Context.System);
             var shardSettings = ClusterShardingSettings.Create(Context.System);
@@ -47,14 +47,14 @@ namespace ShardTest
             {
 
                 var fcId = GenerateRandomFCID();
-                _region.Tell(new FCActorMessages.ProcessMessage(fcId));
+                _region.Tell(new FCActorMessages.OrderIngested(fcId));
 
             });
 
             Receive<BeginTest>(a =>
             {
                 Context.System.Scheduler.ScheduleTellRepeatedly(
-                    TimeSpan.FromSeconds(0), TimeSpan.FromMilliseconds(250), Self, new SendMessage(), ActorRefs.NoSender);
+                    TimeSpan.FromSeconds(0), TimeSpan.FromMilliseconds(500), Self, new SendMessage(), ActorRefs.NoSender);
             });
 
         }

@@ -10,17 +10,17 @@ namespace Akka.DistributedTest.Models
     {
         public string EntityId(object message)
         {
-            return (message as FCActorMessages.ProcessMessage)?.FCID.ToString();
+            return (message as FCActorMessages.OrderIngested)?.FCID.ToString();
         }
 
         public object EntityMessage(object message)
         {
-            return message as FCActorMessages.ProcessMessage;
+            return message as FCActorMessages.OrderIngested;
         }
 
         public string ShardId(object message)
         {
-            var hash = (message as FCActorMessages.ProcessMessage)?.FCID.GetHashCode();
+            var hash = (message as FCActorMessages.OrderIngested)?.FCID.GetHashCode();
             var shardId = hash % 100;
             return shardId.ToString();
         }

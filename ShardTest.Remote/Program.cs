@@ -12,9 +12,10 @@ namespace ShardTest.Remote
         {
             using var sys = ActorSystem.Create("sys");
 
-            //sharded
+            //need to spin up an identical region found in shardtest project in order for 
+            //akka to split messages between both nodes
 
-            var creatorProps = Props.Create<FCActor>();
+            var creatorProps = Props.Create<FCInventoryAllocationActor>();
 
             var shardExtension = ClusterSharding.Get(sys);
             var shardSettings = ClusterShardingSettings.Create(sys);

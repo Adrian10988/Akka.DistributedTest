@@ -22,8 +22,8 @@ namespace ShardTest
             //                return (a as FCActor.ProcessMessage)?.FCID.ToString();
             //            }), router));
 
-            var creator = sys.ActorOf(Props.Create<MessageCreator>());
-            creator.Tell(new MessageCreator.BeginTest());
+            var creator = sys.ActorOf(Props.Create<OrderIngestionActor>());
+            creator.Tell(new OrderIngestionActor.BeginTest());
 
             sys.WhenTerminated.Wait();
         }
