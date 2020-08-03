@@ -13,4 +13,8 @@
     <PackageReference Include="Petabridge.Cmd.Remote" Version="0.8.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Akka.DistributedTest.Models\Akka.DistributedTest.Models.csproj" />
+  </ItemGroup>
+
 </Project>

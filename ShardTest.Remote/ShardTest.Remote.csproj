@@ -9,4 +9,9 @@
     <PackageReference Include="Akka.Cluster.Sharding" Version="1.4.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Akka.DistributedTest.Models\Akka.DistributedTest.Models.csproj" />
+    <ProjectReference Include="..\ShardTest\ShardTest.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -5,6 +5,8 @@ using Akka.Actor;
 using Akka.Cluster;
 using Akka.Cluster.Sharding;
 using Akka.Configuration;
+using Akka.DistributedTest.Models;
+using Akka.DistributedTest.Models.ShardTest;
 using Petabridge.Cmd.Cluster;
 using Petabridge.Cmd.Cluster.Sharding;
 using Petabridge.Cmd.Host;
@@ -21,6 +23,8 @@ namespace ShardTest
         public MessageCreator()
         {
             _r = new Random();
+
+            //sharded
 
             var creatorProps = Create<FCActor>();
 
@@ -43,7 +47,7 @@ namespace ShardTest
             {
 
                 var fcId = GenerateRandomFCID();
-                _region.Tell(new FCActor.ProcessMessage(fcId));
+                _region.Tell(new FCActorMessages.ProcessMessage(fcId));
 
             });
 

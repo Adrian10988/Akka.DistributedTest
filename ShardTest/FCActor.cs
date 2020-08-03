@@ -6,6 +6,7 @@ using Akka.Cluster;
 using Akka.Cluster.Sharding;
 using Akka.Configuration;
 using static Akka.Actor.Props;
+using static Akka.DistributedTest.Models.ShardTest.FCActorMessages;
 
 namespace ShardTest
 {
@@ -21,18 +22,5 @@ namespace ShardTest
             });
         }
 
-
-       
-
-        public class ProcessMessage
-        {
-            public readonly int FCID;
-
-            public ProcessMessage(int fcid)
-            {
-                FCID = fcid;
-            }
-        }
-        
     }
 }
