@@ -27,7 +27,7 @@ namespace Akka.DistributedTest.InventoryAllocation
                 _responder.Tell(new Subscribe(Self));
             });
 
-            _consistentHashRouter = new ConsistentHashingPool(8)
+            _consistentHashRouter = new ConsistentHashingPool(2)
                 .WithHashMapping(a =>
                 {
                     if (a is OrderIngested)
