@@ -5,6 +5,10 @@ using Akka.Actor;
 using Akka.Cluster;
 using Akka.Cluster.Sharding;
 using Akka.Configuration;
+using Petabridge.Cmd.Cluster;
+using Petabridge.Cmd.Cluster.Sharding;
+using Petabridge.Cmd.Host;
+using Petabridge.Cmd.Remote;
 using static Akka.Actor.Props;
 
 namespace ShardTest
@@ -28,6 +32,12 @@ namespace ShardTest
                     creatorProps,
                     shardSettings,
                     new MessageExtractor());
+
+           var pbm = PetabridgeCmd.Get(Context.System);
+           pbm.RegisterCommandPalette(ClusterCommands.Instance);
+           pbm.RegisterCommandPalette(ClusterShardingCommands.Instance);
+           pbm.RegisterCommandPalette(RemoteCommands.Instance);
+           pbm.Start();
 
             Receive<SendMessage>(a =>
             {
